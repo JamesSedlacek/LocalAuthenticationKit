@@ -12,7 +12,7 @@ extension LABiometryType {
     var icon: Image {
         switch self {
         case .none:
-            Image(symbol: .lockSlash)
+            Image(symbol: .questionmark)
         case .touchID:
             Image(symbol: .touchid)
         case .faceID:

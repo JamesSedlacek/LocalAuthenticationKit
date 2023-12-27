@@ -10,13 +10,9 @@ struct LocalAuthenticationView: View {
     @Environment(\.localAuthService)
     private var localAuthService
 
-    private var displayImage: Image {
-        Image(symbol: localAuthService.isAuthenticated ? .lockOpen : .lock)
-    }
-
     var body: some View {
         VStack(spacing: 16) {
-            displayImage
+            Image(symbol: .lock)
                 .contentTransition(.symbolEffect(.replace))
                 .font(.system(size: 40, weight: .medium))
                 .foregroundStyle(.primary)
@@ -25,13 +21,10 @@ struct LocalAuthenticationView: View {
                     Circle()
                         .fill(.secondary.opacity(0.4))
                 }
-            if localAuthService.isAuthenticated {
-                Text("Unlocked")
-            } else {
-                Button("Tap to unlock") {
-                    Task {
-                        await localAuthService.authenticate()
-                    }
+
+            Button("Unlock") {
+                Task {
+                    await localAuthService.authenticate()
                 }
             }
         }

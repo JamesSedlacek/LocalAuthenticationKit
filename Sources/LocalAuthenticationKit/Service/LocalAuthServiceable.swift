@@ -15,7 +15,7 @@ public protocol LocalAuthServiceable: AnyObject, Observable {
     var error: NSError? { get set }
     var onError: (Error) -> Void { get }
 
-    func authenticate() async
+    func authenticate(onSuccess: @escaping () -> Void) async
 }
 
 public extension LocalAuthServiceable {
@@ -34,12 +34,13 @@ public extension LocalAuthServiceable {
     /// If these conditions are met, it attempts to evaluate the device owner authentication policy.
     /// If the authentication is successful, it sets the `isAuthenticated` property to true.
     /// If an error occurs during the authentication process, it calls the `onError` closure with the error.
-    func authenticate() async {
+    func authenticate(onSuccess: @escaping () -> Void = {}) async {
         guard isAvailable, !isAuthenticated else { return }
         do {
             if try await context.evaluatePolicy(.deviceOwnerAuthentication,
                                                 localizedReason: "Please authenticate to continue.") {
                 isAuthenticated = true
+                onSuccess()
             }
         } catch {
             onError(error)

@@ -7,14 +7,13 @@
 import SwiftUI
 
 extension Image {
-    enum SFSymbol: String {
-        case lock
-        case lockOpen = "lock.open"
-        case lockSlash = "lock.slash"
-        case faceid
-        case touchid
-        case opticid
-    }
+enum SFSymbol: String {
+    case faceid
+    case lock
+    case opticid
+    case questionmark
+    case touchid
+}
 
     init(symbol: SFSymbol) {
         self.init(systemName: symbol.rawValue)

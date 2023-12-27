@@ -16,7 +16,7 @@ public final class MockLocalAuthService: LocalAuthServiceable {
     public let onError: (Error) -> Void
     public var error: NSError?
 
-    public func authenticate() async {
+    public func authenticate(onSuccess: @escaping () -> Void = { }) async {
         guard !isAuthenticated else { return }
         isAuthenticated = true
         print("Successfully Authenticated")

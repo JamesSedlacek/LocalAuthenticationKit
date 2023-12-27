@@ -10,12 +10,24 @@ import SwiftUI
 public struct LocalAuthToggle: View {
     @Environment(LocalAuthProvider.self)
     private var localAuthProvider
+    @Environment(\.localAuthService)
+    private var localAuthService
 
     public init() { }
 
     public var body: some View {
         @Bindable var localAuthProvider = localAuthProvider
-        Toggle(isOn: $localAuthProvider.isEnabled) { }
+        if localAuthService.isAuthenticated {
+            Toggle(isOn: $localAuthProvider.isEnabled) { }
+        } else {
+            Button("Setup") {
+                Task {
+                    await localAuthService.authenticate {
+                        localAuthProvider.isEnabled = true
+                    }
+                }
+            }
+        }
     }
 }
 
@@ -35,6 +47,7 @@ public struct LocalAuthToggle: View {
                             .fill(Color.blue)
                     }
                 Text("Privacy Lock")
+                Spacer()
                 LocalAuthToggle()
             }
         }
@@ -42,4 +55,5 @@ public struct LocalAuthToggle: View {
     }
     // NOTE - in your app you won't need to add `.environment` because there will already be a LocalAuthProvider added to the environment via the `.authenticateIfEnabled()` view function. 
     .environment(localAuthProvider)
+    .environment(\.localAuthService, localAuthService)
 }
