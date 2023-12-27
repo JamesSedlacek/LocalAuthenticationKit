@@ -7,11 +7,13 @@
 
 import SwiftUI
 
-struct LocalAuthToggle: View {
+public struct LocalAuthToggle: View {
     @Environment(LocalAuthProvider.self)
     private var localAuthProvider
 
-    var body: some View {
+    public init() { }
+
+    public var body: some View {
         @Bindable var localAuthProvider = localAuthProvider
         Toggle(isOn: $localAuthProvider.isEnabled) { }
     }
