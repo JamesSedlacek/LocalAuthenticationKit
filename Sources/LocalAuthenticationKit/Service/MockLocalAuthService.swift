@@ -28,7 +28,7 @@ public final class MockLocalAuthService: LocalAuthServiceable {
                 onError: @escaping (Error) -> Void = { error in
 
     }) {
-        self.icon = icon ?? Image(symbol: .faceid)
+        self.icon = icon ?? Image(symbol: .lock)
         self.isAvailable = isAvailable
         self.isAuthenticated = isAuthenticated
         self.onError = onError

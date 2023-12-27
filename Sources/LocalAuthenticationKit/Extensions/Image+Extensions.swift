@@ -11,7 +11,6 @@ enum SFSymbol: String {
     case faceid
     case lock
     case opticid
-    case questionmark
     case touchid
 }
 
