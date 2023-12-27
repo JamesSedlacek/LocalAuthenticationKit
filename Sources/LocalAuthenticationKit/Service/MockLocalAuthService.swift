@@ -9,14 +9,14 @@ import SwiftUI
 
 @Observable
 public final class MockLocalAuthService: LocalAuthServiceable {
-    let context: LAContext = .init()
-    let icon: Image
-    let isAvailable: Bool
-    var isAuthenticated: Bool
-    let onError: (Error) -> Void
-    var error: NSError?
+    public let context: LAContext = .init()
+    public let icon: Image
+    public let isAvailable: Bool
+    public var isAuthenticated: Bool
+    public let onError: (Error) -> Void
+    public var error: NSError?
 
-    func authenticate() async {
+    public func authenticate() async {
         guard !isAuthenticated else { return }
         isAuthenticated = true
         print("Successfully Authenticated")

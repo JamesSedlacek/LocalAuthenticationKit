@@ -9,10 +9,10 @@ import LocalAuthentication
 
 @Observable
 public final class LocalAuthService: LocalAuthServiceable {
-    let context: LAContext = .init()
-    let onError: (Error) -> Void
-    var isAuthenticated: Bool = false
-    var error: NSError?
+    public let context: LAContext = .init()
+    public let onError: (Error) -> Void
+    public var isAuthenticated: Bool = false
+    public var error: NSError?
 
     public init(onError: @escaping (Error) -> Void = {_ in }) {
         self.onError = onError
