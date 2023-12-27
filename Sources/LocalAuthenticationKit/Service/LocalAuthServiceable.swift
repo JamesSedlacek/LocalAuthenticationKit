@@ -7,7 +7,7 @@
 import LocalAuthentication
 import SwiftUI
 
-public protocol LocalAuthServiceable: AnyObject, Observable {
+protocol LocalAuthServiceable: AnyObject, Observable {
     var context: LAContext { get }
     var icon: Image { get }
     var isAvailable: Bool { get }
@@ -18,14 +18,14 @@ public protocol LocalAuthServiceable: AnyObject, Observable {
     func authenticate() async
 }
 
-public extension LocalAuthServiceable {
+extension LocalAuthServiceable {
     /// Represents the biometric authentication icon based on the device's biometry type.
-    var icon: Image {
+    public var icon: Image {
         context.biometryType.icon
     }
 
     /// Checks if the device owner authentication policy can be evaluated.
-    var isAvailable: Bool {
+    public var isAvailable: Bool {
         context.canEvaluatePolicy(.deviceOwnerAuthentication, error: &error)
     }
 
