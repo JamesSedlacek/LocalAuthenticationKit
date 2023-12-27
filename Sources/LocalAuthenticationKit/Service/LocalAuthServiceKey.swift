@@ -7,7 +7,7 @@
 import SwiftUI
 
 public struct LocalAuthServiceKey: EnvironmentKey {
-    static let defaultValue: LocalAuthServiceable = LocalAuthService()
+    public static let defaultValue: LocalAuthServiceable = LocalAuthService()
 }
 
 public extension EnvironmentValues {
