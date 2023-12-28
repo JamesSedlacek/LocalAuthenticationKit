@@ -13,24 +13,25 @@ public struct LocalAuthToggle: View {
     @Environment(\.localAuthService)
     private var localAuthService
 
-    private var isSetupShowing: Bool { localAuthService.context.biometryType == .none
-    }
-
     public init() { }
 
     public var body: some View {
-        @Bindable var localAuthProvider = localAuthProvider
-        if isSetupShowing {
-            Button("Setup") {
-                Task {
-                    await localAuthService.authenticate {
-                        localAuthProvider.isEnabled = true
+        let isAuthEnabled = Binding<Bool>(
+            get: { self.localAuthProvider.isEnabled },
+            set: { newValue in
+                if newValue {
+                    Task {
+                        await localAuthService.authenticate {
+                            localAuthProvider.isEnabled = true
+                        }
                     }
+                } else {
+                    localAuthProvider.isEnabled = false
                 }
             }
-        } else {
-            Toggle(isOn: $localAuthProvider.isEnabled) { }
-        }
+        )
+        
+        Toggle(isOn: isAuthEnabled) { }
     }
 }
 
