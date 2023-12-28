@@ -55,7 +55,7 @@ struct ExampleApp: App {
 
 <br>
 
-2. Use a LocalAuthToggle in the settings screen in your project.
+2. Use a `LocalAuthToggle()` in the settings screen in your project.
 ```swift
 import LocalAuthenticationKit
 import SwiftUI
