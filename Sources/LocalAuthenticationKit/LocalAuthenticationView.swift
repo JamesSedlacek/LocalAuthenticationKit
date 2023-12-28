@@ -13,7 +13,6 @@ struct LocalAuthenticationView: View {
     var body: some View {
         VStack(spacing: 16) {
             Image(symbol: .lock)
-                .contentTransition(.symbolEffect(.replace))
                 .font(.system(size: 40, weight: .medium))
                 .foregroundStyle(.primary)
                 .padding(20)

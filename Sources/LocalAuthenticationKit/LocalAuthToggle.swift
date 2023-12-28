@@ -53,6 +53,7 @@ public struct LocalAuthToggle: View {
                 Text("Privacy Lock")
                 Spacer()
                 LocalAuthToggle()
+                    .tint(.blue)
             }
         }
         .navigationTitle("Settings")
